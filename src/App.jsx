@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 const HOOK_TEMPLATES = [
-  (n) => `Day ${n} of following my dad's quantum trading bot...`,
-  (n) => `${n} days in. The bot is still making calls.`,
-  (n) => `We're on day ${n} of this experiment and the bot just picked.`,
+  (n) => `Day ${n} of trading on this video game.`,
+  (n) => `Day ${n}. The quantum bot made its pick — here's what happened.`,
+  (n) => `We're on day ${n} and the bot just told me what to do.`,
 ]
 
 const MOOD_REACTIONS = {
   hyped:     "Honestly? I'm here for it.",
-  skeptical: "I have my doubts, but we're watching.",
+  skeptical: "I have my doubts, but I'm playing the game.",
   surprised: "Didn't see that one coming.",
-  confident: "The bot knows what it's doing. Maybe.",
+  confident: "The bot knows something. Maybe.",
   nervous:   "This one's making me a little nervous, not gonna lie.",
 }
 
@@ -19,18 +19,23 @@ const ACTION_EMOJI = { buy: '📈', sell: '📉', hold: '⏸️' }
 
 function generateScript(entry, dayCount, hookIndex) {
   const hook   = HOOK_TEMPLATES[hookIndex % HOOK_TEMPLATES.length](dayCount)
-  const reason = entry.botReasoning?.trim() || "no idea why — that's the game"
+  const reason = entry.botReasoning?.trim() || "honestly no idea — that's the game"
   const react  = entry.mood ? MOOD_REACTIONS[entry.mood] : "Let's see what happens."
   return [
     `HOOK: "${hook}"`,
+    ``,
+    `BOT SETUP: "So basically there's this quantum trading bot — it analyzes the market`,
+    `and tells me what to trade. I just follow whatever it says."`,
     ``,
     `PICK: "Today it picked ${entry.asset} — ${entry.action.toUpperCase()}."`,
     ``,
     `REASON: "${reason}"`,
     ``,
+    `[SHOW STATS SCREENSHOT]`,
+    ``,
     `REACTION: "${react}"`,
     ``,
-    `CTA: "Follow to see how this plays out."`,
+    `CTA: "Follow along to see where this ends up."`,
   ].join('\n')
 }
 
@@ -39,10 +44,10 @@ function generateCaption(entry, dayCount) {
   const react   = entry.mood ? MOOD_REACTIONS[entry.mood] : "Watching this play out."
   const tag     = entry.asset?.toLowerCase().replace(/[^a-z0-9]/g, '') || 'trading'
   return [
-    `Day ${dayCount}: the bot says ${entry.action.toUpperCase()} on ${entry.asset} ${emoji}`,
+    `Day ${dayCount}: quantum bot said ${entry.action.toUpperCase()} on ${entry.asset} ${emoji}`,
     react,
-    `Following Dad's quantum trading bot as an experiment — not financial advice.`,
-    `#quantumtrading #tradingbot #day${dayCount} #${tag}`,
+    `Trading on this video game, following the bot — not financial advice.`,
+    `#quantumtrading #tradingbot #videogame #day${dayCount} #${tag}`,
   ].join('\n')
 }
 
