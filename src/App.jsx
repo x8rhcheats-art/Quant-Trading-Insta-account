@@ -2,29 +2,29 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 const HOOK_TEMPLATES = [
-  (n) => `I found a quantum trading bot that actually works. Day ${n}.`,
-  (n) => `Day ${n} of running my quantum trading strategy. Here's the move.`,
-  (n) => `Nobody my age does this. Day ${n} update.`,
+  (n) => `I built a quantum trading system inside a video game with AI. Day ${n}.`,
+  (n) => `Day ${n}. My system made its pick — here's what happened.`,
+  (n) => `I coded this thing. Day ${n} update.`,
 ]
 
 const MOOD_REACTIONS = {
-  hyped:     "And honestly? I called it.",
-  skeptical: "I questioned it. But I trust the system.",
-  surprised: "Even I didn't see this one coming — and I built the strategy.",
-  confident: "Exactly what I expected.",
-  nervous:   "High risk play. I took it anyway.",
+  hyped:     "The system is working exactly like I designed it.",
+  skeptical: "I'm questioning my own logic. But I trust the build.",
+  surprised: "Even my own system surprised me on this one.",
+  confident: "Exactly what the algorithm predicted.",
+  nervous:   "High risk signal. I ran it anyway.",
 }
 
 const ACTION_EMOJI = { buy: '📈', sell: '📉', hold: '⏸️' }
 
 function generateScript(entry, dayCount, hookIndex) {
   const hook   = HOOK_TEMPLATES[hookIndex % HOOK_TEMPLATES.length](dayCount)
-  const reason = entry.botReasoning?.trim() || "The algo doesn't always explain itself. That's fine."
-  const react  = entry.mood ? MOOD_REACTIONS[entry.mood] : "We'll see if I'm right."
+  const reason = entry.botReasoning?.trim() || "The system doesn't always show its work. That's part of it."
+  const react  = entry.mood ? MOOD_REACTIONS[entry.mood] : "We'll see if I built something real."
   return [
     `HOOK: "${hook}"`,
     ``,
-    `THE MOVE: "Bot said ${entry.action.toUpperCase()} on ${entry.asset}. I did it."`,
+    `THE PICK: "My system flagged ${entry.asset} — ${entry.action.toUpperCase()}. I executed it."`,
     ``,
     `WHY: "${reason}"`,
     ``,
@@ -32,19 +32,19 @@ function generateScript(entry, dayCount, hookIndex) {
     ``,
     `MY READ: "${react}"`,
     ``,
-    `CTA: "Follow. This is just getting started."`,
+    `CTA: "Follow. I want to see if this holds."`,
   ].join('\n')
 }
 
 function generateCaption(entry, dayCount) {
-  const emoji   = ACTION_EMOJI[entry.action] || '👀'
-  const react   = entry.mood ? MOOD_REACTIONS[entry.mood] : "We'll see if I'm right."
-  const tag     = entry.asset?.toLowerCase().replace(/[^a-z0-9]/g, '') || 'trading'
+  const emoji = ACTION_EMOJI[entry.action] || '👀'
+  const react = entry.mood ? MOOD_REACTIONS[entry.mood] : "We'll see if I built something real."
+  const tag   = entry.asset?.toLowerCase().replace(/[^a-z0-9]/g, '') || 'trading'
   return [
-    `Day ${dayCount}: ${entry.action.toUpperCase()} on ${entry.asset}. ${emoji}`,
+    `Day ${dayCount}: my system said ${entry.action.toUpperCase()} on ${entry.asset}. ${emoji}`,
     react,
-    `Running a quantum trading bot as a game — not financial advice.`,
-    `#quantumtrading #tradingbot #videogame #day${dayCount} #${tag}`,
+    `Built a quantum trading system inside a game with AI — not financial advice.`,
+    `#quantumtrading #claudecode #builtwithAI #videogame #day${dayCount} #${tag}`,
   ].join('\n')
 }
 
